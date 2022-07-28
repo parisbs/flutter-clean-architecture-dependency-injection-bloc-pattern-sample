@@ -9,18 +9,12 @@ class PostRepositoryImpl implements PostRepository {
   final PostRemote remoteDataSource;
 
   @override
-  Future<Result<List<Post>>> getPosts() async {
-    final result = await remoteDataSource.getPosts().catchError((Object obj) {
-      return Result.error(obj);
-    });
-    return Result.value(result);
+  Future<Result<List<Post>>> getPosts() {
+    return Result.capture(remoteDataSource.getPosts());
   }
 
   @override
-  Future<Result<Post>> getPost(int id) async {
-    final result = await remoteDataSource.getPost(id).catchError((Object obj) {
-      return Result.error(obj);
-    });
-    return Result.value(result);
+  Future<Result<Post>> getPost(int id) {
+    return Result.capture(remoteDataSource.getPost(id));
   }
 }

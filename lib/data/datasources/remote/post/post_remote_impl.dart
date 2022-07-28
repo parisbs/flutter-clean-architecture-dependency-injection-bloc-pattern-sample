@@ -1,4 +1,4 @@
-import 'package:apitest/core/error/failures.dart';
+import 'package:apitest/core/error/exceptions.dart';
 import 'package:apitest/data/datasources/remote/post/post_remote.dart';
 import 'package:apitest/data/datasources/remote/post/post_service.dart';
 import 'package:apitest/data/models/post_model.dart';
@@ -11,25 +11,27 @@ class PostRemoteImpl implements PostRemote {
 
   @override
   Future<List<PostModel>> getPosts() async {
-    return await service.getPosts().catchError((Object obj) {
-      if (obj.runtimeType is DioError) {
-        final res = (obj as DioError).response;
-        throw HttpFailure(statusCode: res?.statusCode ?? 0, statusMessage: res?.statusMessage ?? "");
-      } else {
-        throw obj;
-      }
-    });
+    try {
+      return await service.getPosts();
+    } on DioError catch(e) {
+      throw HttpError(
+          message: e.response?.statusMessage ?? e.message,
+        code: e.response?.statusCode ?? -1,
+        stackTrace: e.stackTrace
+      );
+    }
   }
 
   @override
   Future<PostModel> getPost(int id) async {
-    return await service.getPost(id).catchError((Object obj) {
-      if (obj.runtimeType is DioError) {
-        final res = (obj as DioError).response;
-        throw HttpFailure(statusCode: res?.statusCode ?? 0, statusMessage: res?.statusMessage ?? "");
-      } else {
-        throw obj;
-      }
-    });
+    try {
+      return await service.getPost(id);
+    } on DioError catch(e) {
+      throw HttpError(
+          message: e.response?.statusMessage ?? e.message,
+          code: e.response?.statusCode ?? -1,
+          stackTrace: e.stackTrace
+      );
+    }
   }
 }

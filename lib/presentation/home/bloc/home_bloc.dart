@@ -1,4 +1,4 @@
-import 'package:apitest/core/error/failures.dart';
+import 'package:apitest/core/error/exceptions.dart';
 import 'package:apitest/domain/entities/post.dart';
 import 'package:apitest/domain/usecases/get_posts.dart';
 import 'package:equatable/equatable.dart';
@@ -19,8 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (posts.isError) {
         final error = posts.asError!.error;
         switch (error) {
-          case HttpFailure:
-            emit(HomeFailure(message: (error as HttpFailure).statusMessage));
+          case HttpError:
+            emit(HomeFailure(message: (error as HttpError).message));
             break;
           default:
             emit(HomeFailure(message: error.toString()));

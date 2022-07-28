@@ -21,12 +21,12 @@ class PostsList extends StatelessWidget {
           } else if (state is HomeFailure) {
             return Text(state.message);
           } else if (state is HomeSuccess) {
-            return state.posts.isNotEmpty
-                ? ListView.builder(
+            return state.posts.isEmpty
+                ? Text(AppLocalizations.of(context)!.no_posts)
+                : ListView.builder(
               itemCount: state.posts.length,
-              itemBuilder: (context, index) => PostListTile(post: state.posts[index]),
-            )
-                : Text(AppLocalizations.of(context)!.no_posts);
+                itemBuilder: (context, index) => PostListTile(post: state.posts[index])
+            );
           } else {
             return Text(AppLocalizations.of(context)!.unable_to_fetch_posts);
           }

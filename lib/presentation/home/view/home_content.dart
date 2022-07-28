@@ -11,12 +11,10 @@ class HomeContent extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.homeTitle),
       ),
-      body: const SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: PostsList(),
-          ),
+      body: const Center(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: PostsList(),
         ),
       ),
     );
