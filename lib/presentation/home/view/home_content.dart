@@ -1,6 +1,6 @@
+import 'package:apitest/l10n/l10n.dart';
 import 'package:apitest/presentation/home/view/posts_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.homeTitle),
+        title: Text(context.l10n.homeTitle),
       ),
       body: const Center(
         child: Padding(

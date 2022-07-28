@@ -7,10 +7,6 @@
     "@homeTitle": {
         "description": "The home page title"
     },
-    "loading": "Loading, please wait",
-    "@loading": {
-        "description": "Message to show when the app is loading"
-    },
     "no_posts": "No posts",
     "@no_posts": {
         "description": "Message to show when the API returns no posts"
@@ -18,5 +14,13 @@
     "unable_to_fetch_posts": "Unable to fetch posts",
     "@unable_to_fetch_posts": {
         "description": "Message to show when the app cannot fetch posts, maybe caused by internet failures"
+    },
+    "loading": "Loading, please wait",
+    "@loading": {
+        "description": "Message to show when the app is loading"
+    },
+    "retry": "Retry",
+    "@retry": {
+        "description": "Text for retry buttons"
     }
 }

@@ -1,7 +1,6 @@
+import 'package:apitest/l10n/l10n.dart';
 import 'package:apitest/presentation/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -9,14 +8,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      onGenerateTitle: (context) => AppLocalizations.of(context)!.appName,
+      localizationsDelegates: context.localizationsDelegates,
+      supportedLocales: context.supportedLocales,
+      onGenerateTitle: (context) => context.l10n.appName,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

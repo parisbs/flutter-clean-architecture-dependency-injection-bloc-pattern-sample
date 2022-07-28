@@ -1,10 +1,10 @@
-import 'package:apitest/core/widgets/error_message_with_retry.dart';
 import 'package:apitest/injection_container.dart' as di;
+import 'package:apitest/core/widgets/error_message_with_retry.dart';
+import 'package:apitest/l10n/l10n.dart';
 import 'package:apitest/presentation/home/bloc/home_bloc.dart';
 import 'package:apitest/presentation/home/view/post_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostsList extends StatelessWidget {
   const PostsList({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class PostsList extends StatelessWidget {
         builder: (context, state) {
           if (state is HomeLoading) {
             return CircularProgressIndicator(
-              semanticsLabel: AppLocalizations.of(context)!.loading,
+              semanticsLabel: context.l10n.loading,
             );
           } else if (state is HomeFailure) {
             return ErrorMessageWithRetry(
@@ -26,14 +26,14 @@ class PostsList extends StatelessWidget {
             );
           } else if (state is HomeSuccess) {
             return state.posts.isEmpty
-                ? Text(AppLocalizations.of(context)!.no_posts)
+                ? Text(context.l10n.no_posts)
                 : ListView.builder(
               itemCount: state.posts.length,
                 itemBuilder: (context, index) => PostListTile(post: state.posts[index])
             );
           } else {
             return ErrorMessageWithRetry(
-                message: AppLocalizations.of(context)!.no_posts,
+                message: context.l10n.unable_to_fetch_posts,
                 onRetryPressed: (context) => context.read<HomeBloc>().add(FetchPostsHomeEvent()),
             );
           }

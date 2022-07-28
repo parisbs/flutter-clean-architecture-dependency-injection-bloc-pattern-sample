@@ -1,0 +1,8 @@
+{
+    "appName": "Prueba de API",
+    "homeTitle": "Inicio",
+    "no_posts": "Ningún post",
+    "unable_to_fetch_posts": "No se pueden cargar los posts",
+    "loading": "Cargando, por favor espera un momento",
+    "retry": "Reintentar"
+}
