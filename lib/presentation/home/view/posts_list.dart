@@ -1,3 +1,4 @@
+import 'package:apitest/core/widgets/error_message_with_retry.dart';
 import 'package:apitest/injection_container.dart' as di;
 import 'package:apitest/presentation/home/bloc/home_bloc.dart';
 import 'package:apitest/presentation/home/view/post_list_tile.dart';
@@ -19,7 +20,10 @@ class PostsList extends StatelessWidget {
               semanticsLabel: AppLocalizations.of(context)!.loading,
             );
           } else if (state is HomeFailure) {
-            return Text(state.message);
+            return ErrorMessageWithRetry(
+                message: state.message,
+                onRetryPressed: (context) => context.read<HomeBloc>().add(FetchPostsHomeEvent()),
+            );
           } else if (state is HomeSuccess) {
             return state.posts.isEmpty
                 ? Text(AppLocalizations.of(context)!.no_posts)
@@ -28,7 +32,10 @@ class PostsList extends StatelessWidget {
                 itemBuilder: (context, index) => PostListTile(post: state.posts[index])
             );
           } else {
-            return Text(AppLocalizations.of(context)!.unable_to_fetch_posts);
+            return ErrorMessageWithRetry(
+                message: AppLocalizations.of(context)!.no_posts,
+                onRetryPressed: (context) => context.read<HomeBloc>().add(FetchPostsHomeEvent()),
+            );
           }
         },
       ),
