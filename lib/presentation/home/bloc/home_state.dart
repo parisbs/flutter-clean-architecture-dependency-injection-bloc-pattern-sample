@@ -1,29 +1,37 @@
 part of 'home_bloc.dart';
 
 @immutable
-abstract class HomeState extends Equatable {
-  const HomeState();
-}
-
-class HomeLoading extends HomeState {
-  @override
-  List<Object> get props => [];
-}
-
-class HomeSuccess extends HomeState {
-  const HomeSuccess({required this.posts});
-
+class HomeState extends Equatable {
+  final bool isLoading;
+  final String? errorMessage;
   final List<Post> posts;
 
+  const HomeState({
+    required this.isLoading,
+    required this.errorMessage,
+    required this.posts,
+  });
+
+  factory HomeState.initial() {
+    return const HomeState(isLoading: false, errorMessage: null, posts: []);
+  }
+
+  HomeState copyWith({
+    bool? isLoading,
+    String? errorMessage,
+    List<Post>? posts,
+  }) {
+    return HomeState(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      posts: posts ?? this.posts,
+    );
+  }
+
   @override
-  List<Object> get props => [posts];
-}
+  String toString() =>
+      'HomeState{ isLoading: $isLoading, errorMessage: $errorMessage, posts: $posts,}';
 
-class HomeFailure extends HomeState {
-  const HomeFailure({required this.message});
-
-  final String message;
-
-@override
-List<Object> get props => [message];
+  @override
+  List<Object?> get props => [isLoading, errorMessage, posts];
 }

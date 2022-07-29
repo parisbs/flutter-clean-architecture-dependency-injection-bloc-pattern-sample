@@ -12,30 +12,27 @@ class PostsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>(
-        create: (context) => di.injector.get<HomeBloc>()..add(FetchPostsHomeEvent()),
+      create: (context) =>
+          di.injector.get<HomeBloc>()..add(FetchPostsHomeEvent()),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          if (state is HomeLoading) {
+          if (state.isLoading) {
             return CircularProgressIndicator(
               semanticsLabel: context.l10n.loading,
             );
-          } else if (state is HomeFailure) {
+          } else if (state.errorMessage != null) {
             return ErrorMessageWithRetry(
-                message: state.message,
-                onRetryPressed: (context) => context.read<HomeBloc>().add(FetchPostsHomeEvent()),
+              message: state.errorMessage!,
+              onRetryPressed: (context) =>
+                  context.read<HomeBloc>().add(FetchPostsHomeEvent()),
             );
-          } else if (state is HomeSuccess) {
+          } else {
             return state.posts.isEmpty
                 ? Text(context.l10n.no_posts)
                 : ListView.builder(
-              itemCount: state.posts.length,
-                itemBuilder: (context, index) => PostListTile(post: state.posts[index])
-            );
-          } else {
-            return ErrorMessageWithRetry(
-                message: context.l10n.unable_to_fetch_posts,
-                onRetryPressed: (context) => context.read<HomeBloc>().add(FetchPostsHomeEvent()),
-            );
+                    itemCount: state.posts.length,
+                    itemBuilder: (context, index) =>
+                        PostListTile(post: state.posts[index]));
           }
         },
       ),
