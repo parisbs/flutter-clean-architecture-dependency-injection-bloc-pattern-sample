@@ -1,17 +1,21 @@
-import 'package:apitest/domain/entities/post.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'post_model.g.dart';
 
 @JsonSerializable()
-class PostModel extends Post {
+class PostModel {
   const PostModel({
-    required int id,
-    required String title,
-    required String body
-}) : super(id: id, title: title, body: body);
+    this.id,
+    this.title,
+    this.body,
+  });
 
-  factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
+  final int? id;
+  final String? title;
+  final String? body;
+
+  factory PostModel.fromJson(Map<String, dynamic> json) =>
+      _$PostModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PostModelToJson(this);
 }
