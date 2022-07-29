@@ -1,5 +1,6 @@
 import 'package:apitest/l10n/l10n.dart';
 import 'package:apitest/presentation/home.dart';
+import 'package:apitest/presentation/post_details/view/post_details_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -14,7 +15,11 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName: (_) => const HomePage(),
+        PostDetailsPage.routeName: (_) => const PostDetailsPage(),
+      },
     );
   }
 }

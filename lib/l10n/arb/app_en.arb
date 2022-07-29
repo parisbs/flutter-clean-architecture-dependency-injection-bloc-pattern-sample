@@ -15,6 +15,18 @@
     "@unable_to_fetch_posts": {
         "description": "Message to show when the app cannot fetch posts, maybe caused by internet failures"
     },
+    "comments": "Comments",
+    "@comments": {
+        "description": "The comments title to indicate the comments section"
+    },
+    "no_comments": "No comments",
+    "@no_comments": {
+        "description": "Message to show when the API returns no comments"
+    },
+    "unable_to_fetch_comments": "Unable to fetch comments",
+    "@unable_to_fetch_comments": {
+        "description": "Message to show when the app cannot fetch comments, maybe caused by internet failures"
+    },
     "loading": "Loading, please wait",
     "@loading": {
         "description": "Message to show when the app is loading"

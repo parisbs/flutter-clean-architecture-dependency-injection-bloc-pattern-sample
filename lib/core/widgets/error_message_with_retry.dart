@@ -16,7 +16,7 @@ class ErrorMessageWithRetry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
@@ -25,7 +25,7 @@ class ErrorMessageWithRetry extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          Column(
+          Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               MaterialButton(

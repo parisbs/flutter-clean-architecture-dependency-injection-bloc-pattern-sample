@@ -3,6 +3,9 @@
     "homeTitle": "Inicio",
     "no_posts": "Ningún post",
     "unable_to_fetch_posts": "No se pueden cargar los posts",
+    "comments": "Comentarios",
+    "no_comments": "Ningún comentario",
+    "unable_to_fetch_comments": "No se pueden cargar los comentarios",
     "loading": "Cargando, por favor espera un momento",
     "retry": "Reintentar"
 }
