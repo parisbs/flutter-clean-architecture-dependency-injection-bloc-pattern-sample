@@ -1,18 +1,23 @@
-import 'package:apitest/domain/entities/comment.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'comment_model.g.dart';
 
 @JsonSerializable()
-class CommentModel extends Comment {
+class CommentModel {
   const CommentModel({
-    required super.id,
-    required super.name,
-    required super.email,
-    required super.body
+    this.id,
+    this.name,
+    this.email,
+    this.body
 });
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) => _$CommentModelFromJson(json);
+  final int? id;
+  final String? name;
+  final String? email;
+  final String? body;
+
+  factory CommentModel.fromJson(Map<String, dynamic> json) =>
+      _$CommentModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentModelToJson(this);
 }

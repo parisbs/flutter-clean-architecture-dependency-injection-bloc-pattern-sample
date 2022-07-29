@@ -4,9 +4,6 @@ import 'package:apitest/core/widgets/error_message_with_retry.dart';
 import 'package:apitest/l10n/l10n.dart';
 import 'package:apitest/presentation/home/bloc/home_bloc.dart';
 import 'package:apitest/presentation/home/view/post_list_tile.dart';
-import 'package:apitest/presentation/post_details/bloc/post_details_cubit.dart';
-import 'package:apitest/presentation/post_details/view/post_details_arguments.dart';
-import 'package:apitest/presentation/post_details/view/post_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +30,7 @@ class PostsList extends StatelessWidget {
                 ? Text(
                 context.l10n.no_posts,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontStyle: FontStyle.italic,
               ),
@@ -41,7 +38,7 @@ class PostsList extends StatelessWidget {
                 : ListView.builder(
                     itemCount: state.posts.length,
                     itemBuilder: (context, index) =>
-                        PostListTile(post: state.posts[index]));
+                        PostListTile(state.posts[index]));
           }
         },
       ),

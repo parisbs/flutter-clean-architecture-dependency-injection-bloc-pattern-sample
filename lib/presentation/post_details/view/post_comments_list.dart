@@ -18,35 +18,31 @@ class PostCommentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<PostDetailsCubit>(
-        create: (context) => di.injector.get<PostDetailsCubit>()..fetchPostComments(postId),
+        create: (context) =>
+        di.injector.get<PostDetailsCubit>()..fetchPostComments(postId),
       child: BlocBuilder<PostDetailsCubit, PostDetailsState>(
         builder: (context, state) {
-          if (state.status == PostDetailsStatus.loading) {
+          if (state.isLoading) {
             return const LoadingCircularIndicator();
-          } else if (state.status == PostDetailsStatus.failure) {
+          } else if (state.errorMessage != null) {
             return ErrorMessageWithRetry(
-                message: state.errorMessage,
+                message: state.errorMessage!,
                 onRetryPressed: (context) => context.read<PostDetailsCubit>().fetchPostComments(postId),
             );
-          } else if (state.status == PostDetailsStatus.success) {
+          } else {
             return state.postComments.isEmpty
                 ? Text(
                 context.l10n.no_comments,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontStyle: FontStyle.italic,
               ),
             )
                 : ListView.builder(
               itemCount: state.postComments.length,
-                itemBuilder: (context, index) => PostCommentListTile(state.postComments[index]),
-            );
-          } else {
-            return ErrorMessageWithRetry(
-                message: context.l10n.unable_to_fetch_comments,
-                onRetryPressed: (context) => context.read<PostDetailsCubit>().fetchPostComments(postId),
-            );
+                itemBuilder: (context, index) =>
+                    PostCommentListTile(state.postComments[index]));
           }
         },
       ),

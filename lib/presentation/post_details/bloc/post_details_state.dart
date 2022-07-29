@@ -1,27 +1,37 @@
 part of 'post_details_cubit.dart';
 
-enum PostDetailsStatus { loading, success, failure }
-
+@immutable
 class PostDetailsState extends Equatable {
-  const PostDetailsState._({
-    this.status = PostDetailsStatus.loading,
-    this.postComments = const <Comment>[],
-    this.errorMessage = ''
+  final bool isLoading;
+  final String? errorMessage;
+  final List<Comment> postComments;
+
+  const PostDetailsState({
+    required this.isLoading,
+    required this.errorMessage,
+    required this.postComments,
 });
 
-  const PostDetailsState.loading()
-  : this._();
+  factory PostDetailsState.initial() {
+    return const PostDetailsState(isLoading: false, errorMessage: null, postComments: []);
+  }
 
-  const PostDetailsState.success(List<Comment> postComments)
-  : this._(status: PostDetailsStatus.success, postComments: postComments);
-
-  const PostDetailsState.failure(String errorMessage)
-  : this._(status: PostDetailsStatus.failure, errorMessage: errorMessage);
-
-  final PostDetailsStatus status;
-  final List<Comment> postComments;
-  final String errorMessage;
+  PostDetailsState copyWith({
+  bool? isLoading,
+    String? errorMessage,
+    List<Comment>? postComments,
+}) {
+    return PostDetailsState(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      postComments: postComments ?? this.postComments,
+    );
+  }
 
   @override
-  List<Object> get props => [status, postComments, errorMessage];
+  String toString() =>
+      'PostDetailsState{ isLoading: $isLoading, errorMessage: $errorMessage, postComments: $postComments,}';
+
+  @override
+  List<Object?> get props => [isLoading, errorMessage, postComments];
 }

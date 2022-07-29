@@ -30,7 +30,7 @@ class PostDetailsPage extends StatelessWidget {
                 child: Text(
                   context.l10n.comments,
                   textAlign: TextAlign.start,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),

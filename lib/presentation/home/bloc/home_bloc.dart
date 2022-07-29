@@ -1,7 +1,6 @@
 import 'package:apitest/core/error/exceptions.dart';
 import 'package:apitest/domain/entities/post.dart';
 import 'package:apitest/domain/usecases/get_posts.dart';
-import 'package:apitest/presentation/home.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
