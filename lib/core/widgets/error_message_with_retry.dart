@@ -6,7 +6,7 @@ class ErrorMessageWithRetry extends StatelessWidget {
     super.key,
     required this.message,
     required this.onRetryPressed,
-    this.retryLabel
+    this.retryLabel,
   });
 
   final String message;
@@ -29,10 +29,8 @@ class ErrorMessageWithRetry extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               MaterialButton(
-                  onPressed: () => onRetryPressed,
-                child: Text(
-                  retryLabel ?? context.l10n.retry
-                ),
+                onPressed: () => onRetryPressed(context),
+                child: Text(retryLabel ?? context.l10n.retry),
               ),
             ],
           ),
